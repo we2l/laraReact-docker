@@ -8,7 +8,7 @@ services:
       args:
         user: w2l
         uid: 1000
-    image: api_laravel_bank
+    image: api_laravel
     restart: unless-stopped
     working_dir: /var/www/
     volumes:
@@ -17,7 +17,6 @@ services:
       - application
 
   client:
-    container_name: react
     build:
       context: client
       dockerfile: Dockerfile
@@ -33,7 +32,6 @@ services:
       
 
   nginx: 
-    container_name: nginx
     image: nginx:alpine
     restart: unless-stopped
     depends_on:
@@ -47,7 +45,6 @@ services:
       - application
   
   mysql: 
-    container_name: mysql
     image: mysql:5.7.22
     restart: unless-stopped
     environment:
