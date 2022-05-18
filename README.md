@@ -33,6 +33,12 @@ Rode os seguintes comandos na raiz do projeto:
   $ cd api-laravel
   
   $ cp .env.example .env
+  
+  $ cd .. 
+  
+  $ cd client
+  
+  $ npm install
 ```
 
 - No arquivo .env criado, edite as variáveis de ambiente "DB_DATABASE", "DB_USERNAME" e "DB_PASSWORD" de acordo com suas necessidades, são essas variáveis que serão 
