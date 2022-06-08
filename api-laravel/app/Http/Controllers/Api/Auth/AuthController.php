@@ -7,13 +7,14 @@ use App\Http\Requests\GetLoginRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreRegisterRequest;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
     public function Login(GetLoginRequest $request)
     {
         if(!Auth::attempt($request->validated()))
-            return $this->error(401);
+            return $this->error(401, 'Credênciais inválidas');
     
         $user = User::where('email', $request->email)->firstOrFail();
         
@@ -31,6 +32,11 @@ class AuthController extends Controller
             'password' => bcrypt($request->password)
         ]);
 
-        return $this->success($user->createToken('JWT')->plainTextToken, 201);
+        return $this->success($user->createToken('auth_token')->plainTextToken, 201);
+    }
+
+    public function me(Request $request)
+    {
+        return $request->user();
     }
 }

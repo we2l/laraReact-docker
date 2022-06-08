@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Controllers\Api;
 
+use App\Models\User;
 use Tests\TestCase;
 
 class ProductControllerTest extends TestCase
@@ -12,11 +13,25 @@ class ProductControllerTest extends TestCase
      */
     public function shouldBeAbleToGetAllProducts()
     {
-        // Arrange
-        // Preciso ter produtos cadastrados no banco
+        $user = User::factory()->create();
+ 
+        $this->actingAs($user);
+        $response = $this->getJson('/api/product');
 
-        // Act
+        $response
+            ->assertStatus(200)
+            ->assertJson(['success' => true]);
+    }
 
-        // Assert
+    /**
+     * @test
+     */
+    public function shouldBeReturnStatus401Unauthenticated()
+    {
+        $response = $this->getJson("/api/product");
+
+        $response
+            ->assertUnauthorized()
+            ->assertJson(['message' => 'Unauthenticated.']);
     }
 }
