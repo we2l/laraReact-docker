@@ -39,7 +39,7 @@ class ProductController extends Controller
     {
         $product = $this->product::create($request->validated());
 
-        return $this->success(new ProductResource($product));
+        return $this->success(new ProductResource($product), 201);
     }
 
     /**
@@ -84,7 +84,7 @@ class ProductController extends Controller
      */
     public function destroy(string $slug)
     {
-        $product = $this->product::where('slug', $slug);
+        $product = $this->product::where('slug', $slug)->first();
 
         if(!$product)
             return $this->error(404);
