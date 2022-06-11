@@ -45,10 +45,6 @@ class AuthControllerTest extends TestCase
      */
     public function shouldBeAbleToLogin()
     {
-        // verificar se o usuario existe
-        // se existir retorna um token de acesso
-        // se não retorna um erro com unauthenticate 401
-
         User::factory()->create([
             'email' => 'teste@gmail.com',
             'password' => bcrypt('password')

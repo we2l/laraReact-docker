@@ -18,7 +18,7 @@ class ProductFactory extends Factory
     {   
         $name = $this->faker->unique()->name();
         return [
-            'name' => $this->faker->unique()->name(),
+            'name' => $name,
             'description' => $this->faker->text(),
             'slug' => Str::of($name)->slug('-'),
             'image' => 'path.jpg', // password
