@@ -8,6 +8,19 @@ use Tests\TestCase;
 
 class CategoryControllerTest extends TestCase
 {   
+
+    /**
+     * @test
+     */
+    public function shouldBeReturnStatus401Unauthenticated()
+    {
+        $response = $this->getJson("/api/category");
+
+        $response
+            ->assertUnauthorized()
+            ->assertJson(['message' => 'Unauthenticated.']);
+    }
+
     /**
      * @test
      */
